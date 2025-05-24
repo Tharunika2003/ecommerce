@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Now - E-commerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #product {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        #orderForm {
+            margin-top: 30px;
+            background-color:plum;
+            max-width: 400px;
+            margin: auto;
+            border: 1px solid pink;
+            padding: 20px;
+            border-radius: 40px;
+            box-shadow: rgba(224, 95, 218, 0.56) 0px 22px 70px 4px;
+            margin-top: 90px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="orderForm" onsubmit="return placeOrder()">
+        <h2>Order Details</h2>
+
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="username" name="fullName" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="address">Shipping Address:</label>
+        <textarea id="address" name="address" rows="4" required></textarea>
+        <br><br>
+        <input type="submit" value="Buy Now" id="submitBtn" style="margin-left:150px;">
+    </form>
+
+    <script>
+
+const submitButton = document.getElementById('submitBtn');
+submitButton.addEventListener('click', validateCustomerDetails);
+
+function validateCustomerDetails(e) {
+    e.preventDefault();
+  // Retrieve stored user data from local storage
+  const storedUserData = localStorage.getItem("userData");
+  
+  // Check if stored user data exists
+  if (!storedUserData) {
+    alert("No user data found. Please log in.");
+    return;
+  }
+
+  const userData = JSON.parse(storedUserData);
+
+  // Get the entered username and email from the form
+  const enteredUsername = document.getElementById('username').value;
+  const enteredEmail = document.getElementById('email').value;
+
+  // Compare the entered values with the stored values
+  if (enteredUsername === userData.username && enteredEmail === userData.email) {
+    alert('Customer details validation successful!');
+    // Optionally, you may also prevent further processing or redirect to an error page
+
+    console.log('redirecting to home page');
+     // Redirect to the home page in the current tab
+     window.location.replace("./home.html");
+  } else {
+    alert('Invalid customer details. Please check your username and email.');
+    // Optionally, prevent further processing or redirect to an error page
+  }
+
+}
+    </script>
+</body>
+</html>
